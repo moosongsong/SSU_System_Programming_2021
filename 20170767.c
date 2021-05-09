@@ -21,6 +21,9 @@ int main() {
             case 2:
                 result = deallocateData(heap);
                 break;
+	    default:
+		result = false;
+		break;
         }
 //        if (menuNum > 2) {
 //            listFinalize(heap);
