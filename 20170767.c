@@ -22,10 +22,10 @@ int main() {
                 result = deallocateData(heap);
                 break;
         }
-        if (menuNum > 2) {
-            listFinalize(heap);
-            break;
-        }
+//        if (menuNum > 2) {
+//            listFinalize(heap);
+//           break;
+//        }
 
         if (result == true) {
             dump_mem(heap->base, BYTE_SIZE);
@@ -53,7 +53,7 @@ bool allocateData(MyHeap *heap) {
     char typeBuffer[BUFFSIZE] = {0,};
     char nameBuffer[BUFFSIZE] = {0,};
 
-    printf("What is the type of data you want to allocate and will be the name of the data?\n");
+    printf("What is the type of data you want to allocate and what will be the name of the data?\n");
     scanf("%s %s", typeBuffer, nameBuffer);
 
     bool result = false;
@@ -70,6 +70,12 @@ bool allocateData(MyHeap *heap) {
         result = false;
     }
 
+    if(result == true){
+	    printf("%s has been allocated successfully\n", nameBuffer);
+    }else{
+	    printf("allocation is failed\n");
+    }
+
     return result;
 }
 
@@ -83,8 +89,16 @@ bool deallocateData(MyHeap *heap) {
     char nameBuffer[BUFFSIZE] = {0,};
     printf("What is the name of data you want to deallocate?\n");
     scanf("%s", nameBuffer);
+    
+    int result = removeAsName(heap, nameBuffer);
 
-    return removeAsName(heap, nameBuffer);
+    if(result == true){
+	    printf("%s has been deallocated successfully\n", nameBuffer);
+    }else{
+	    printf("deallocation is failed\n");
+    }
+
+    return result;
 }
 
 bool removeAsName(MyHeap *heap, char *name) {
@@ -145,7 +159,7 @@ bool insertStruct(MyHeap *heap, char *name) {
     scanf("%d", &howMany);
 
     char typeBuffer[BUFFSIZE] = {0,};
-    printf("please specify its type and value\n");
+    printf("please specify each type and its value\n");
 
     for (int i = 0; i < howMany; ++i) {
         scanf("%s", typeBuffer);
