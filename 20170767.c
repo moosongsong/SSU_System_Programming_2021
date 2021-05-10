@@ -61,6 +61,11 @@ bool allocateData(MyHeap *heap) {
 
     bool result = false;
 
+    if(findNode(heap, nameBuffer)!=-1){
+	    printf("%s is already exist.\n", nameBuffer);
+	    return false;
+    }
+
     if (strncmp(typeBuffer, STR_STRUCT, STR_STRUCT_LEN) == 0) {// struct
         result = insertStruct(heap, nameBuffer);
     } else if (strncmp(typeBuffer, STR_CHAR, STR_CHAR_LEN) == 0) {// char
